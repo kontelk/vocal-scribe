@@ -6,7 +6,7 @@ def video_to_text(video_path, output_file="transcript.txt"):
     try:
         # Step 1: Extract audio from video
         video = VideoFileClip(video_path)
-        audio_path = "audio.aac" #Corrected audio path
+        audio_path = "audio.aac" # audio path
         video.audio.write_audiofile(audio_path, codec="aac")
         
         # Step 2: Load Whisper model
@@ -14,10 +14,20 @@ def video_to_text(video_path, output_file="transcript.txt"):
         
         # Step 3: Transcribe audio
         result = model.transcribe(audio_path,
-            fp16=True,           # Use fp16
+            fp16=False,           # Use fp16 or fp32
+            task="transcribe",   # Choose between "transcribe" and "translate"
             language="en",       # Optional language hint
             # temperature=0.2,     # Balance speed/accuracy
             # beam_size=3          # Moderate beam search
+            # best_of=5,           # Best of N sampling
+            # word_timestamps=True, # Get word timestamps
+            # initial_prompt="Hello", # Initial prompt
+            # suppress_tokens="-1", # Suppress tokens
+            # condition_on_previous_text=True, # Condition on previous text
+            # without_timestamps=False, # Without timestamps
+            # word_timestamps=True, # Word timestamps
+            # no_speech_threshold=0.6, # No speech threshold
+            # language_detection=True, # Language detection
         )
         
         # Step 4: Save transcript

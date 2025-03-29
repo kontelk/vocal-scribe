@@ -175,3 +175,10 @@ cython_debug/
 
 # VS Code
 .vscode
+
+# Video and audio files
+*.mp4
+*.aac
+
+# transcript files
+transcript.txt
